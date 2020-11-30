@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * @author lynn
  */
-public class Consumer {
+public class  Consumer {
     /**
      * KafkaConsumer：需要创建一个消费者对象，用来消费数据
      * ConsumerConfig：获取所需的一系列配置参数

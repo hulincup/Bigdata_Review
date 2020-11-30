@@ -25,7 +25,7 @@ public class DataSetSQL {
 
         batchTableEnv.createTemporaryView("person",dataSource);
 
-
+        //batchTableEnv.insertInto();
         Table table = batchTableEnv.sqlQuery("select * from person where score > 90");
         table.printSchema();
 

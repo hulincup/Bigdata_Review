@@ -19,20 +19,20 @@ import org.apache.flink.table.descriptors.Schema;
  */
 public class TableAPI {
     public static void main(String[] args) throws Exception {
-        StreamExecutionEnvironment streamEnv = StreamExecutionEnvironment.getExecutionEnvironment();
         //流处理sql环境
+        StreamExecutionEnvironment streamEnv = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment streamTableEnv = StreamTableEnvironment.create(streamEnv);
-
-        ExecutionEnvironment batchEenv = ExecutionEnvironment.getExecutionEnvironment();
         //批处理sql环境
-        BatchTableEnvironment batchTableEnv = BatchTableEnvironment.create(batchEenv);
+        ExecutionEnvironment batchEnv = ExecutionEnvironment.getExecutionEnvironment();
+        BatchTableEnvironment batchTableEnv = BatchTableEnvironment.create(batchEnv);
 
         //读取csv文件
-        DataSource<Person> dataSource = batchEenv.readCsvFile("C:\\Java\\IdeaProjects\\Bigdata_Review\\Flink\\src\\main\\resources\\person.txt")
+        DataSource<Person> dataSource = batchEnv.readCsvFile("C:\\Java\\IdeaProjects\\Bigdata_Review\\Flink\\src\\main\\resources\\person.txt")
                 .ignoreFirstLine()
                 .pojoType(Person.class, "id", "name", "age", "score", "cls");
 
         //将dataSource注册成临时表
+        //streamTableEnv.registerDataStream("person",dataSource);
         //batchTableEnv.registerDataSet("person",dataSource); 过时了
         batchTableEnv.createTemporaryView("person",dataSource);
         //batchTableEnv.scan("person"); 过时了

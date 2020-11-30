@@ -21,6 +21,7 @@ public class WindowFunctionTest {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         DataStreamSource<String> ds = env.socketTextStream("bd1301", 7777);
+
         SingleOutputStreamOperator<Tuple2<String, Integer>> map = ds.map(new MapFunction<String, Tuple2<String, Integer>>() {
             @Override
             public Tuple2<String, Integer> map(String value) throws Exception {

@@ -19,6 +19,7 @@ import javax.crypto.MacSpi;
  */
 public class DataStreamSQL {
     public static void main(String[] args) throws Exception {
+        //流环境streamEnv
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment streamTableEnv = StreamTableEnvironment.create(env);
 
@@ -43,8 +44,8 @@ public class DataStreamSQL {
         table.printSchema();
 
         //转换成dataSet
-        //DataStream<Tuple2<Boolean, Person>> ds = streamTableEnv.toRetractStream(table, Person.class);
-        DataStream<Person> ds = streamTableEnv.toAppendStream(table, Person.class);
+        DataStream<Tuple2<Boolean, Person>> ds = streamTableEnv.toRetractStream(table, Person.class);
+        //DataStream<Person> ds = streamTableEnv.toAppendStream(table, Person.class);
         //streamTableEnv.toRetractStream(table, Row.class);
 
         ds.print();

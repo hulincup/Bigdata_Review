@@ -1,6 +1,6 @@
 package com.suning.wc
 
-import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
+import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment,_}
 
 object WordCount {
   def main(args: Array[String]): Unit = {
@@ -14,6 +14,7 @@ object WordCount {
     //val path="./hello.txt"
     val dataSet: DataSet[String] = environment.readTextFile(path)
 
+    //dataSet.flatMap()
     //进行flatmap
     val wordCountDataSet = dataSet.
       flatMap(_.split("\\s"))

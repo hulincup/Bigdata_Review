@@ -22,6 +22,12 @@
         <module>Kylin</module>
         <module>Flink</module>
         <module>Kafka</module>
+        <module>Elasticsearch</module>
+        <module>Zookeeper</module>
+        <module>Elasticsearch</module>
+        <module>ElasticSearch</module>
+        <module>Redis</module>
+        <module>Test</module>
     </modules>
 
 

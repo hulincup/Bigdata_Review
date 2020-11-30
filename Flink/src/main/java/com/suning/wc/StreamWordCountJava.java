@@ -2,6 +2,7 @@ package com.suning.wc;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -16,6 +17,8 @@ public class StreamWordCountJava {
         //获取环境
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         environment.disableOperatorChaining();
+        //定义time类型，默认就是eventTime
+        environment.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         //获取流
         DataStreamSource<String> dataStream = environment.socketTextStream("bd1301", 7777);
 
@@ -29,6 +32,7 @@ public class StreamWordCountJava {
                 }
             }
         })
+                //因为是tuple元组 所以直接keyBy对应位置的元素
                 .keyBy(0)
          //       .timeWindow(Time.seconds(5))
                 .sum(1);
